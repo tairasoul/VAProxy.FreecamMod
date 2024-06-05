@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.8.34212.112
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FreecamMod", "FreecamMod.csproj", "{FAE2FC21-26DD-4802-AC9E-CF6648BFAB07}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{FAE2FC21-26DD-4802-AC9E-CF6648BFAB07}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FAE2FC21-26DD-4802-AC9E-CF6648BFAB07}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FAE2FC21-26DD-4802-AC9E-CF6648BFAB07}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FAE2FC21-26DD-4802-AC9E-CF6648BFAB07}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {0C1713E0-50D3-448C-BF37-9FEA2E6EC052}
+	EndGlobalSection
+EndGlobal
