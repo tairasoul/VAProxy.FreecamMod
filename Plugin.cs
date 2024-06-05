@@ -23,7 +23,7 @@ using UnityEngine.SceneManagement;
 
 namespace FreecamMod 
 {
-	[BepInPlugin("tairasoul.vaproxy.freecam", "Freecam", "1.0.0")]
+	[BepInPlugin("tairasoul.vaproxy.freecam", "Freecam", "1.0.1")]
 	class Plugin : BaseUnityPlugin
 	{
 		Rect windowRect = new(20, 20, 200, 100);
