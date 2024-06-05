@@ -29,8 +29,11 @@ namespace FreecamMod
 		Rect windowRect = new(20, 20, 200, 100);
 		Rect infoRect = new(2, 979, 200, 48);
 		ConfigEntry<KeyCode> activate;
+		ConfigEntry<KeyCode> activateInfo;
 		internal static ManualLogSource Log;
 		bool active = false;
+		bool infoActive = false;
+		bool infoHeld = false;
 		bool activeHeld = false;
 		Freecam? freecam;
 		Scene currentScene;
@@ -38,6 +41,7 @@ namespace FreecamMod
 		{
 			Log = Logger;
 			activate = Config.Bind("Keybinds", "Activate Freecam Window", KeyCode.F9, "The keycode that activates the freecam window.");
+			activateInfo = Config.Bind("Keybinds", "Activate Info Window", KeyCode.F10, "The keycode that activates the info window.");
 			SceneManager.activeSceneChanged += SceneLoaded;
 			//Harmony a = new("g");
 			//a.PatchAll();
@@ -46,7 +50,7 @@ namespace FreecamMod
 		{
 			if (active) 
 				windowRect = GUILayout.Window(1, windowRect, DrawWindow, "Freecam");
-			if (fcActive)
+			if (fcActive && infoActive)
 				infoRect = GUI.Window(2, infoRect, DrawInfo, "FreecamInfo");
 		}
 		
@@ -134,6 +138,18 @@ namespace FreecamMod
 			else 
 			{
 				activeHeld = false;
+			}
+			if (UnityInput.Current.GetKeyDown(activateInfo.Value)) 
+			{
+				if (!infoHeld) 
+				{
+					infoHeld = true;
+					infoActive = !infoActive;
+				}
+			}
+			else 
+			{
+				infoHeld = false;
 			}
 		}
 	}
