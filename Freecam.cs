@@ -28,20 +28,25 @@ namespace FreecamMod
 
 		public void setActive(bool active) 
 		{
+			StartCoroutine(SetMovementComponents(!active));
 			freecamActive = active;
 			original_camera.enabled = !active;
-			StartCoroutine(SetMovementComponents(!active));
+			GameObject sen = GameObject.Find("S-105.1");
+			Rigidbody body = sen.GetComponent<Rigidbody>();
+			body.velocity = Vector3.zero;
 		}
+		
+		private Vector3? anchPosition;
 		
 		IEnumerator SetMovementComponents(bool active) 
 		{
-			GameObject sen = GameObject.Find("S-105");
+			GameObject sen = GameObject.Find("S-105.1");
 			while (true) 
 			{
 				if (sen)
 					break;
-				sen = GameObject.Find("S-105");
-				yield return null;
+				sen = GameObject.Find("S-105.1");
+				yield return new WaitForEndOfFrame();
 			}
 			GameObject v06 = GameObject.Find("V-06");
 			while (true) 
@@ -49,17 +54,26 @@ namespace FreecamMod
 				if (v06)
 					break;
 				v06 = GameObject.Find("V-06");
-				yield return null;
+				yield return new WaitForEndOfFrame();
 			}
 			sen.GetComponent<vThirdPersonController>().enabled = active;
 			sen.GetComponent<vShooterMeleeInput>().enabled = active;
 			sen.GetComponent<vMeleeManager>().enabled = active;
 			v06.GetComponent<Drone>().enabled = active;
-			v06.GetComponentInChildren<projectileActor>().enabled = active;
 			Rigidbody body = sen.GetComponent<Rigidbody>();
 			body.useGravity = active;
 			if (!active)
 				body.velocity = Vector3.zero;
+		}
+		
+		void EnsureVelocityIsZero() 
+		{
+			GameObject sen = GameObject.Find("S-105.1");
+			if (anchPosition == null)
+				anchPosition = sen.transform.localPosition;
+			sen.transform.localPosition = anchPosition.Value;
+			Rigidbody body = sen.GetComponent<Rigidbody>();
+			body.velocity = Vector3.zero;
 		}
 		
 		void Update() 
@@ -68,7 +82,10 @@ namespace FreecamMod
 			{
 				float scroll = Input.GetAxis("Mouse ScrollWheel");
 				desiredMoveSpeed += scroll * 10;
+				EnsureVelocityIsZero();
 			}
+			else
+				anchPosition = null;
 		}
 		
 		void LateUpdate() 

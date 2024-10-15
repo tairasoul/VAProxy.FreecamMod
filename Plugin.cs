@@ -23,7 +23,7 @@ using UnityEngine.SceneManagement;
 
 namespace FreecamMod 
 {
-	[BepInPlugin("tairasoul.vaproxy.freecam", "Freecam", "1.0.1")]
+	[BepInPlugin("tairasoul.vaproxy.freecam", "Freecam", "1.0.2")]
 	class Plugin : BaseUnityPlugin
 	{
 		Rect windowRect = new(20, 20, 200, 100);
@@ -70,10 +70,7 @@ namespace FreecamMod
 				GameObject TPC = GameObject.Find("TPC");
 				if (TPC) 
 				{
-					if (!TPC.GetComponent<Freecam>())
-						freecam = TPC.AddComponent<Freecam>();
-					else
-						freecam = TPC.GetComponent<Freecam>();
+					freecam = TPC.GetComponent<Freecam>() ?? TPC.AddComponent<Freecam>();
 					break;
 				}
 				yield return null;
